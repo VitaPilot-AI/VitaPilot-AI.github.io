@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VitaPilot AI — Practical AI, charted around you</title>
+  <meta name="description" content="VitaPilot AI designs custom AI agents and solutions built around your goals, workflows, and daily routines — human-centered AI that creates measurable value." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23F6A860' stroke-width='2'/%3E%3Cpath d='M16 6 L21 22 L16 18 L11 22 Z' fill='%23F6A860'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="top">
+    <a class="brand" href="#top" aria-label="VitaPilot AI home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55"/>
+        <path d="M16 5 L21.5 23 L16 18.6 L10.5 23 Z" fill="currentColor"/>
+      </svg>
+      <span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#approach">Approach</a>
+      <a href="#who">Who we help</a>
+      <a href="#contact" class="nav-cta">Start a project</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="tick"></span>AI Consulting &amp; Development</p>
+          <h1 class="hero-title">Chart a practical course<br />into AI.</h1>
+          <p class="hero-sub">VitaPilot AI designs custom AI agents and solutions built around your goals, workflows, and daily routines — so the technology works for the people using it, not the other way around.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Start a project</a>
+            <a class="btn btn-ghost" href="#capabilities">See what we build</a>
+          </div>
+        </div>
+
+        <!-- Signature: flight-path instrument -->
+        <div class="hero-instrument" aria-hidden="true">
+          <svg class="flightpath" viewBox="0 0 460 420" role="img">
+            <defs>
+              <radialGradient id="horizon" cx="78%" cy="24%" r="60%">
+                <stop offset="0%" stop-color="#F6A860" stop-opacity="0.55"/>
+                <stop offset="45%" stop-color="#F6A860" stop-opacity="0.10"/>
+                <stop offset="100%" stop-color="#F6A860" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="pathgrad" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#7ED0D6"/>
+                <stop offset="100%" stop-color="#F6A860"/>
+              </linearGradient>
+            </defs>
+
+            <!-- horizon glow -->
+            <circle cx="360" cy="100" r="200" fill="url(#horizon)"/>
+
+            <!-- bezel ticks (instrument bezel) -->
+            <g class="bezel" stroke="#93A6BE" stroke-width="1">
+              <line x1="30" y1="40" x2="30" y2="52"/>
+              <line x1="94" y1="40" x2="94" y2="48"/>
+              <line x1="158" y1="40" x2="158" y2="48"/>
+              <line x1="222" y1="40" x2="222" y2="52"/>
+              <line x1="286" y1="40" x2="286" y2="48"/>
+              <line x1="350" y1="40" x2="350" y2="48"/>
+              <line x1="414" y1="40" x2="414" y2="52"/>
+            </g>
+            <text class="readout" x="30" y="30">HDG 042°</text>
+            <text class="readout" x="414" y="30" text-anchor="end">DEST · WITH AI</text>
+
+            <!-- faint grid horizon -->
+            <line class="horizon-line" x1="24" y1="300" x2="436" y2="300"/>
+
+            <!-- the charted path -->
+            <path class="route" d="M70 350 C 150 330, 210 250, 250 190 S 340 90, 400 96"
+                  fill="none" stroke="url(#pathgrad)" stroke-width="2.5"
+                  stroke-linecap="round" stroke-dasharray="6 9"/>
+
+            <!-- origin -->
+            <circle class="node origin" cx="70" cy="350" r="6"/>
+            <text class="node-label" x="70" y="378" text-anchor="middle">TODAY</text>
+
+            <!-- moving bearing marker -->
+            <g class="marker">
+              <path d="M0 -9 L6 8 L0 4 L-6 8 Z" fill="#EAF1F8"/>
+            </g>
+
+            <!-- destination -->
+            <g class="dest">
+              <circle cx="400" cy="96" r="9" fill="none" stroke="#F6A860" stroke-width="2"/>
+              <circle cx="400" cy="96" r="3" fill="#F6A860"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- instrument readout strip -->
+      <div class="readout-strip">
+        <div class="readout-item">
+          <span class="readout-key">Human-centered</span>
+          <span class="readout-val">People first, technology second.</span>
+        </div>
+        <div class="readout-item">
+          <span class="readout-key">Custom-built</span>
+          <span class="readout-val">No one-size-fits-all chatbots.</span>
+        </div>
+        <div class="readout-item">
+          <span class="readout-key">Measurable value</span>
+          <span class="readout-val">Real outcomes in real workflows.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="section" id="capabilities">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>Capabilities</p>
+        <h2 class="section-title">Custom AI systems, tailored to how you actually work.</h2>
+        <p class="section-lead">We design and develop AI-powered solutions around each client's goals, preferences, and daily routines — reducing repetitive work, improving decisions, and helping you use AI with confidence.</p>
+      </div>
+
+      <ul class="grid cards">
+        <li class="card">
+          <span class="card-tag">Agents</span>
+          <h3>Custom AI agents</h3>
+          <p>Personalized AI systems that take on real tasks and adapt to your goals, not a generic assistant bolted onto your day.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Automation</span>
+          <h3>Workflow automation</h3>
+          <p>Quietly remove the repetitive steps between you and the work that matters, from routine handoffs to end-to-end processes.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Conversation</span>
+          <h3>Chatbot development</h3>
+          <p>Assistants that answer clearly, understand context, and improve the experience for your customers and your team.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Research</span>
+          <h3>Productivity &amp; research assistance</h3>
+          <p>Tools that gather, summarize, and organize information so you can decide faster and spend attention where it counts.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Logistics</span>
+          <h3>Travel &amp; logistics planning</h3>
+          <p>AI that handles the moving parts of planning and coordination, turning scattered details into a clear, workable plan.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Data</span>
+          <h3>Data-driven tools</h3>
+          <p>Turn the information you already have into dashboards, insights, and decisions you can actually act on.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Prototyping</span>
+          <h3>AI product prototyping</h3>
+          <p>Move from idea to a working prototype quickly, so you can test what's valuable before committing to build it.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Integration</span>
+          <h3>LLM integration</h3>
+          <p>Bring large language models into the systems you already run, connected safely to your data and your tools.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- APPROACH (genuine sequence — the flight plan) -->
+    <section class="section approach" id="approach">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>The flight plan</p>
+        <h2 class="section-title">A people-first path from idea to impact.</h2>
+        <p class="section-lead">We work closely with you at every stage. The goal is never technology for its own sake — it's AI that supports human productivity, creativity, learning, and well-being.</p>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-no">01</span>
+          <div class="step-body">
+            <h3>Understand</h3>
+            <p>We start by learning your needs, preferences, workflows, and routines — the real texture of how you and your team work day to day.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">02</span>
+          <div class="step-body">
+            <h3>Chart the course</h3>
+            <p>Together we identify the high-impact use cases where AI creates the most value, and design a practical system to reach them.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">03</span>
+          <div class="step-body">
+            <h3>Build &amp; guide</h3>
+            <p>We develop reliable solutions, integrate them into what you already use, and stay a trusted guide as you adopt AI with confidence.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- WHO WE HELP -->
+    <section class="section who" id="who">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>Who we help</p>
+        <h2 class="section-title">A strategic partner, technical builder, and trusted guide.</h2>
+        <p class="section-lead">We work with people and organizations ready to embrace AI in real personal and professional settings.</p>
+      </div>
+      <ul class="audience">
+        <li>Small businesses</li>
+        <li>Startups</li>
+        <li>Professionals</li>
+        <li>Teams</li>
+        <li>Organizations</li>
+      </ul>
+    </section>
+
+    <!-- MISSION -->
+    <section class="section mission">
+      <blockquote class="mission-quote">
+        <p>We make artificial intelligence <em>practical, accessible, and human-centered</em> — helping individuals, teams, and organizations live and work better with AI.</p>
+        <footer>VitaPilot AI, LLC · Founded 2026</footer>
+      </blockquote>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="contact-inner">
+        <p class="eyebrow"><span class="tick"></span>Set a heading</p>
+        <h2 class="contact-title">Ready to put AI to work — thoughtfully?</h2>
+        <p class="contact-lead">Tell us what you're trying to do. We'll help you find the high-impact use cases and build something that creates real value.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:info@vitapilotai.com?subject=Project%20inquiry%20—%20VitaPilot%20AI">Start a project</a>
+        <p class="contact-email"><a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p>
+        <address class="contact-address">
+          101 Seabreeze Blvd, Apt 410<br />
+          Daytona Beach, FL 32118
+        </address>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="brand" href="#top" aria-label="VitaPilot AI home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55"/>
+          <path d="M16 5 L21.5 23 L16 18.6 L10.5 23 Z" fill="currentColor"/>
+        </svg>
+        <span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span>
+      </a>
+      <div class="footer-mid">
+        <p class="footer-tag">Helping you live and work better with AI.</p>
+        <address class="footer-address">101 Seabreeze Blvd, Apt 410 · Daytona Beach, FL 32118</address>
+      </div>
+      <p class="footer-legal">© <span id="year">2026</span> VitaPilot AI, LLC · <a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
