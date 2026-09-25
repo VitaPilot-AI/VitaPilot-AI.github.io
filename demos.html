@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Demos — VitaPilot AI</title>
-  <meta name="description" content="A look at what practical, human-centered AI tooling looks like when VitaPilot AI builds it — AgentMine, a visual AI agent builder, and flakelens, an open-source LLM flakiness auditor." />
+  <meta name="description" content="Practical, human-centered tools from VitaPilot AI: AgentMine, flakelens, and CSV Flight Check for private spreadsheet preflight." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23F6A860' stroke-width='2'/%3E%3Cpath d='M16 6 L21 22 L16 18 L11 22 Z' fill='%23F6A860'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,7 +26,7 @@
       <a href="index.html#capabilities">Capabilities</a>
       <a href="index.html#who">Who we help</a>
       <a href="#agentmine">Demos</a>
-      <a href="#flakelens">Open source</a>
+      <a href="#csv-flight-check">Data tools</a>
       <a href="index.html#contact" class="nav-cta">Start a project</a>
     </nav>
   </header>
@@ -38,10 +38,10 @@
         <div class="hero-copy">
           <p class="eyebrow"><span class="tick"></span>Demo project</p>
           <h1 class="hero-title">See the idea,<br />not just the pitch.</h1>
-          <p class="hero-sub">We build things, not just decks. Here's a look at what we've been making — a way to design and test AI agents without writing code, and an open-source tool for telling real LLM failures apart from flaky ones.</p>
+          <p class="hero-sub">We build things, not just decks. Explore an agent-building prototype, an open-source LLM reliability tool, and a local-first CSV check that helps catch import problems before they reach your workflow.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#agentmine">See the demo</a>
-            <a class="btn btn-ghost" href="#flakelens">Open source: flakelens</a>
+            <a class="btn btn-ghost" href="#csv-flight-check">Try CSV Flight Check</a>
           </div>
         </div>
       </div>
@@ -139,10 +139,44 @@
       </div>
     </section>
 
+
+    <!-- CSV FLIGHT CHECK -->
+    <section class="section" id="csv-flight-check">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>CSV Flight Check · data tool</p>
+        <h2 class="section-title">Catch CSV import problems before they become cleanup work.</h2>
+        <p class="section-lead">A small, local-first preflight for CSV and TSV files. It flags structural issues, whitespace, duplicate rows, mixed date styles, and formula-like cells. Choose the reversible fixes you want, preview the result, and export a cleaned copy plus an issue report. The file stays in your browser; nothing is uploaded.</p>
+      </div>
+
+      <ul class="grid cards cards-3">
+        <li class="card">
+          <span class="card-tag">Inspect</span>
+          <h3>See the shape of the file</h3>
+          <p>Check headers, row widths, blank rows, missing cells, and likely date-style inconsistencies before importing.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Review</span>
+          <h3>Keep decisions visible</h3>
+          <p>Exact duplicates and whitespace are counted. Ambiguous values are flagged for a person to decide, never guessed.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Export</span>
+          <h3>Take away a checked copy</h3>
+          <p>Apply only the cleanup rules you select, then download the result and a compact JSON issue report.</p>
+        </li>
+      </ul>
+
+      <div class="hero-actions" style="margin-top:1.75rem">
+        <a class="btn btn-primary" href="demos/csv-flight-check/">Try CSV Flight Check</a>
+        <a class="btn btn-ghost" href="https://github.com/VitaPilot-AI/VitaPilot-AI.github.io/tree/main/demos/csv-flight-check">View source</a>
+      </div>
+      <p class="section-lead" style="margin-top:1rem">Need someone to review a real workbook? <a href="index.html#contact">Ask VitaPilot AI about a small, fixed-scope cleanup</a>. We confirm the data rules and delivery terms before work begins.</p>
+    </section>
+
     <!-- CONTACT -->
     <section class="section contact" id="contact">
       <div class="contact-inner">
-        <p class="eyebrow"><span class="tick"></span>Set a heading</p>
+        <p class="eyebrow"><span class="tick"></span>Start a conversation</p>
         <h2 class="contact-title">Want something like this for your team?</h2>
         <p class="contact-lead">This is one example of how we approach AI — practical, visible, and built around how people actually work. Let's talk about what that could look like for you.</p>
         <a class="btn btn-primary btn-lg" href="mailto:info@vitapilotai.com?subject=Project%20inquiry%20—%20VitaPilot%20AI">Start a project</a>

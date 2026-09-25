@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Inspect CSV and TSV files locally before importing. Review issues and choose safe cleanup steps without uploading your data." />
+  <title>CSV Flight Check — VitaPilot AI</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23F6A860' stroke-width='2'/%3E%3Cpath d='M16 6 L21 22 L16 18 L11 22 Z' fill='%23F6A860'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" id="top">
+    <a class="brand" href="../../index.html" aria-label="VitaPilot AI home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55" />
+        <path d="M16 5 L21.5 23 L16 18.6 L10.5 23 Z" fill="currentColor" />
+      </svg>
+      <span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../../demos.html">Demos</a>
+      <a href="../../index.html#contact" class="nav-cta">Talk to us</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero hero-simple">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="tick"></span>Local file tool · CSV / TSV</p>
+          <h1 class="hero-title">A quick preflight<br />for your CSV.</h1>
+          <p class="hero-sub">Find structural issues and review safe cleanup options before an import. Your file is processed in this browser tab. It is not uploaded or sent to an AI service.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#check">Check a file</a>
+            <a class="btn btn-ghost" href="../../demos.html#csv-flight-check">About this tool</a>
+          </div>
+          <p class="privacy-note"><span aria-hidden="true">●</span> Local processing · no account · no file upload</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tool-section" id="check" aria-labelledby="check-title">
+      <div class="tool-panel">
+        <div class="tool-heading">
+          <div>
+            <p class="eyebrow"><span class="tick"></span>Preflight desk</p>
+            <h2 class="section-title" id="check-title">Choose a CSV or TSV file</h2>
+            <p class="section-lead">Files are read locally. Maximum file size: 10 MB. Exact duplicate removal and whitespace trimming are optional and previewed before export.</p>
+          </div>
+          <button class="btn btn-ghost" id="sample-button" type="button">Try a synthetic sample</button>
+        </div>
+
+        <label class="drop-zone" id="drop-zone" for="file-input">
+          <span class="drop-icon" aria-hidden="true">↥</span>
+          <span class="drop-title">Drop a file here or choose a file</span>
+          <span class="drop-copy">CSV, TSV, or TXT · up to 10 MB</span>
+          <input id="file-input" type="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain" />
+        </label>
+
+        <div class="tool-status" id="status" role="status" aria-live="polite">No file selected. Try the synthetic sample to see the checks.</div>
+
+        <div class="results hidden" id="results">
+          <div class="results-head">
+            <div>
+              <p class="eyebrow"><span class="tick"></span>Audit summary</p>
+              <h3 id="file-name">File report</h3>
+              <p class="muted-line" id="file-shape"></p>
+            </div>
+            <div class="score" id="score" aria-live="polite">
+              <strong id="issue-count">0</strong>
+              <span>items to review</span>
+            </div>
+          </div>
+
+          <div class="metric-grid" id="metrics" aria-label="File checks"></div>
+
+          <div class="issues-wrap">
+            <h3>Findings</h3>
+            <ul class="issue-list" id="issue-list"></ul>
+          </div>
+
+          <div class="options-wrap">
+            <h3>Optional cleanup</h3>
+            <div class="option-grid">
+              <label class="option"><input type="checkbox" id="trim-option" /> <span><strong>Trim extra spaces</strong><small>Remove leading and trailing spaces from cells.</small></span></label>
+              <label class="option"><input type="checkbox" id="blank-option" /> <span><strong>Skip fully blank rows</strong><small>Remove rows with no values.</small></span></label>
+              <label class="option"><input type="checkbox" id="duplicate-option" /> <span><strong>Remove exact duplicate rows</strong><small>Keep the first occurrence. No fuzzy matching.</small></span></label>
+              <label class="option"><input type="checkbox" id="formula-option" /> <span><strong>Protect formula-like cells in export</strong><small>Prefix formula-like expressions with an apostrophe; ordinary signed numbers stay unchanged.</small></span></label>
+            </div>
+            <p class="option-note" id="option-note">No cleanup is applied until you select a rule. Ambiguous values are never inferred.</p>
+          </div>
+
+          <div class="preview-wrap">
+            <div class="preview-heading">
+              <div>
+                <h3>Preview</h3>
+                <p class="muted-line" id="preview-count"></p>
+              </div>
+              <span class="format-pill" id="delimiter-label"></span>
+            </div>
+            <div class="table-scroll" tabindex="0" aria-label="CSV preview table">
+              <table id="preview-table"></table>
+            </div>
+          </div>
+
+          <div class="tool-actions">
+            <button class="btn btn-primary" id="download-button" type="button">Download cleaned CSV</button>
+            <button class="btn btn-ghost" id="report-button" type="button">Download issue report</button>
+            <button class="text-button" id="clear-button" type="button">Clear this file</button>
+          </div>
+          <p class="disclosure">The CSV and issue report are created in your browser. This demo does not store the file or send it to VitaPilot AI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section how-section">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>How to use it</p>
+        <h2 class="section-title">Review first. Choose only the fixes you need.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="step-no">01</span><div class="step-body"><h3>Inspect locally</h3><p>Pick a CSV or TSV. The tool checks structure, blanks, whitespace, duplicate rows, formula-like values, and date-style differences in this tab.</p></div></li>
+        <li class="step"><span class="step-no">02</span><div class="step-body"><h3>Choose reversible rules</h3><p>Decide whether to trim, skip blank rows, remove exact duplicates, or protect formula-like values. Original source rows stay in memory until you clear the file or close the tab.</p></div></li>
+        <li class="step"><span class="step-no">03</span><div class="step-body"><h3>Export evidence</h3><p>Download a separate CSV and JSON summary. Conflicting or unclear data is flagged for human review instead of being guessed.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="contact-inner">
+        <p class="eyebrow"><span class="tick"></span>Reviewed cleanup service</p>
+        <h2 class="contact-title">Need the file cleaned and checked for you?</h2>
+        <p class="contact-lead">VitaPilot AI can scope a small spreadsheet cleanup, preserve the supplied source, and return a change summary. Share only the row and column counts first; we agree the rules and delivery terms before any work begins.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:info@vitapilotai.com?subject=CSV%20cleanup%20fit%20check%20%E2%80%94%20VitaPilot%20AI">Request a fit check</a>
+        <p class="contact-email"><a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="brand" href="../../index.html" aria-label="VitaPilot AI home"><span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span></a>
+      <div class="footer-mid"><p class="footer-tag">A practical preflight for safer spreadsheet imports.</p></div>
+      <p class="footer-legal">© <span id="year">2026</span> VitaPilot AI, LLC · <a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p>
+    </div>
+  </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
