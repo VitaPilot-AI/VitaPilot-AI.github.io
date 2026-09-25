@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Demos — VitaPilot AI</title>
-  <meta name="description" content="Practical tools from VitaPilot AI: AgentPath workflow trace checks, LLM reliability and cost tools, CSV Flight Check, and AgentMine." />
+  <meta name="description" content="Try VitaPilot AI's public AgentPath workflow trace reviewer, CSV Flight Check, and LLM reliability tools. AgentMine is a private local preview." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23F6A860' stroke-width='2'/%3E%3Cpath d='M16 6 L21 22 L16 18 L11 22 Z' fill='%23F6A860'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,7 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="index.html#capabilities">Capabilities</a>
       <a href="index.html#who">Who we help</a>
-      <a href="#agentmine">Demos</a>
+      <a href="#agentpath">Demos</a>
       <a href="#agentpath">Agent workflows</a>
       <a href="#csv-flight-check">Data tools</a>
       <a href="#developer-tools">Developer tools</a>
@@ -42,7 +42,7 @@
           <h1 class="hero-title">See the idea,<br />not just the pitch.</h1>
           <p class="hero-sub">We build practical tools, not just decks. Explore AgentPath workflow trace checks, browser-local spreadsheet review, and small Python tools for LLM reliability, retrieval quality, and spend control.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#agentmine">See the demo</a>
+            <a class="btn btn-primary" href="demos/agentpath/">Try AgentPath</a>
             <a class="btn btn-ghost" href="#developer-tools">LLM developer tools</a>
           </div>
         </div>
@@ -54,26 +54,30 @@
       <div class="section-head">
         <p class="eyebrow"><span class="tick"></span>AgentMine</p>
         <h2 class="section-title">Build an agent the way you'd build a checklist.</h2>
-        <p class="section-lead">AgentMine is a visual tool for assembling a working AI agent out of simple, reusable building blocks — then watching it run, in real time, against realistic scenarios. It's a preview of how we like to make AI legible: something you can watch work, not just trust blindly.</p>
+        <p class="section-lead">AgentMine is a private development preview for assembling and observing agent workflows. It is not a public hosted demo. The local mock mode runs without an API key; live Anthropic calls require your own key and may incur provider charges. The current prototype uses mocked MCP connectors.</p>
       </div>
 
       <ul class="grid cards cards-3">
         <li class="card">
           <span class="card-tag">Build</span>
           <h3>Stack simple blocks</h3>
-          <p>Snap together steps and equip them with the capabilities they need — no wiring diagrams, no code required.</p>
+          <p>Arrange workflow steps and equip the model with tools, memory, or knowledge in the local preview.</p>
         </li>
         <li class="card">
           <span class="card-tag">Run</span>
           <h3>Watch it think</h3>
-          <p>Press run and follow a live simulation that lights up each step, with plain-language notes on what happened and why.</p>
+          <p>Run the built-in meeting-summary scenario in mock mode and follow the execution events in the debug feed.</p>
         </li>
         <li class="card">
           <span class="card-tag">Practice</span>
           <h3>Test it before it matters</h3>
-          <p>Run the agent through realistic scenarios and see exactly what it got right, what it missed, and where to improve — before it touches real work.</p>
+          <p>Use the offline mock to explore the build-and-review loop. The preview does not connect to real business systems.</p>
         </li>
       </ul>
+      <div class="hero-actions" style="margin-top:1.75rem">
+        <a class="btn btn-primary" href="mailto:info@vitapilotai.com?subject=AgentMine%20private%20preview%20%E2%80%94%20VitaPilot%20AI">Ask about the private preview</a>
+        <a class="btn btn-ghost" href="demos/agentpath/">Try public AgentPath</a>
+      </div>
     </section>
 
     <!-- HOW IT WORKS -->
