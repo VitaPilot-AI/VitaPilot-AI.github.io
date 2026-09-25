@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Review an agent workflow trace against an expected sequence, data handoffs, approval guards, and write actions. Runs locally in your browser." />
+  <title>AgentPath — VitaPilot AI</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23F6A860' stroke-width='2'/%3E%3Cpath d='M16 6 L21 22 L16 18 L11 22 Z' fill='%23F6A860'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" id="top">
+    <a class="brand" href="../../index.html" aria-label="VitaPilot AI home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55" />
+        <path d="M16 5 L21.5 23 L16 18.6 L10.5 23 Z" fill="currentColor" />
+      </svg>
+      <span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../../demos.html">Demos</a>
+      <a href="../../index.html#contact" class="nav-cta">Talk to us</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero hero-simple">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="tick"></span>Local trace reviewer · JSON</p>
+          <h1 class="hero-title">Did the workflow<br />do the right work?</h1>
+          <p class="hero-sub">Check a captured agent workflow against the steps you expected. Spot missing handoffs, changed IDs, unmet approval guards, tool errors, and repeated writes.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#review">Review a trace</a>
+            <a class="btn btn-ghost" href="../../demos.html#agentpath">About AgentPath</a>
+          </div>
+          <p class="privacy-note"><span aria-hidden="true">●</span> Local processing · no account · no upload · no model calls</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tool-section" id="review" aria-labelledby="review-title">
+      <div class="tool-panel">
+        <div class="tool-heading">
+          <div>
+            <p class="eyebrow"><span class="tick"></span>Journey review</p>
+            <h2 class="section-title" id="review-title">Load an AgentPath JSON trace</h2>
+            <p class="section-lead">The file contains an expected step contract and observed call/result events. AgentPath checks tool order, selected argument values, captured handoffs, approval guards, errors, and duplicate writes.</p>
+          </div>
+          <label class="file-button btn btn-ghost" for="file-input">Open JSON file</label>
+          <input id="file-input" type="file" accept=".json,application/json" />
+        </div>
+
+        <label class="field-label" for="trace-input">Trace contract and events</label>
+        <textarea id="trace-input" spellcheck="false" aria-describedby="format-note" placeholder="Load the built-in scenario or paste an AgentPath JSON document."></textarea>
+        <p class="format-note" id="format-note">Use the built-in example to see the expected JSON shape. Map a captured run into this format; AgentPath does not connect to or invoke your server.</p>
+
+        <div class="tool-actions">
+          <button class="btn btn-ghost" id="load-sample" type="button">Load example</button>
+          <button class="btn btn-primary" id="check-button" type="button">Check workflow</button>
+          <button class="btn btn-ghost" id="download-report" type="button" disabled>Download report</button>
+          <button class="text-button" id="clear-button" type="button">Clear</button>
+        </div>
+        <p class="format-note"><a href="sample-trace.json" download>Download the example JSON</a></p>
+        <p class="tool-status" id="status" role="status" aria-live="polite">Load an example or a JSON trace to begin.</p>
+
+        <section class="results hidden" id="results" aria-labelledby="results-title">
+          <div class="results-head">
+            <div>
+              <p class="eyebrow"><span class="tick"></span>Review result</p>
+              <h3 id="results-title">Workflow findings</h3>
+            </div>
+            <div class="score" id="score"><strong>—</strong><span>steps checked</span></div>
+          </div>
+          <div class="metric-grid" id="metrics"></div>
+          <div class="issues-wrap">
+            <h3>Findings</h3>
+            <ul class="issue-list" id="issue-list"></ul>
+          </div>
+          <div class="preview-wrap">
+            <div class="preview-heading">
+              <h3>Observed sequence</h3>
+              <span id="run-name" class="format-pill">Trace</span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>#</th><th>Expected / observed tool</th><th>Effect</th><th>Outcome</th></tr></thead>
+                <tbody id="event-rows"></tbody>
+              </table>
+            </div>
+          </div>
+          <p class="disclosure">A passing report means the trace matched the checks you supplied. It does not prove the tool's real-world effect, correctness, safety, or authorization.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="section approach how-section">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>What it checks</p>
+        <h2 class="section-title">Follow the handoff, not just the green call.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-no">01</span>
+          <div class="step-body">
+            <h3>Compare the sequence</h3>
+            <p>Check whether expected tools ran in order, whether any step failed, and whether an unplanned event appeared.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">02</span>
+          <div class="step-body">
+            <h3>Trace values across calls</h3>
+            <p>Capture a value from one result, then require the next call to use that exact value in its arguments.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-no">03</span>
+          <div class="step-body">
+            <h3>Guard side effects</h3>
+            <p>Require an earlier approval result before a write, flag duplicate writes, and export a review report.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section contact" id="pilot">
+      <div class="contact-inner">
+        <p class="eyebrow"><span class="tick"></span>VitaPilot AI LLC · paid pilot</p>
+        <h2 class="contact-title">Need a workflow review?</h2>
+        <p class="contact-lead">We can review one agent workflow of up to 10 expected steps and 5 redacted traces. Deliverable: an annotated findings report and a deterministic acceptance-checklist draft within one business day after complete inputs. No credentials or production access. Scope and fee are agreed before work begins.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:info@vitapilotai.com?subject=AgentPath%20workflow%20review%20pilot%20%E2%80%94%20VitaPilot%20AI">Discuss a paid pilot</a>
+        <p class="contact-email">One clarification or revision is included in the agreed scope.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="brand" href="../../index.html" aria-label="VitaPilot AI home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.55" />
+          <path d="M16 5 L21.5 23 L16 18.6 L10.5 23 Z" fill="currentColor" />
+        </svg>
+        <span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span>
+      </a>
+      <p class="footer-legal">© <span id="year">2026</span> VitaPilot AI, LLC · <a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

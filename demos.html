@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Demos — VitaPilot AI</title>
-  <meta name="description" content="Practical tools from VitaPilot AI: LLM reliability and cost checks, CSV Flight Check, flakelens, and AgentMine." />
+  <meta name="description" content="Practical tools from VitaPilot AI: AgentPath workflow trace checks, LLM reliability and cost tools, CSV Flight Check, and AgentMine." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23F6A860' stroke-width='2'/%3E%3Cpath d='M16 6 L21 22 L16 18 L11 22 Z' fill='%23F6A860'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,6 +26,7 @@
       <a href="index.html#capabilities">Capabilities</a>
       <a href="index.html#who">Who we help</a>
       <a href="#agentmine">Demos</a>
+      <a href="#agentpath">Agent workflows</a>
       <a href="#csv-flight-check">Data tools</a>
       <a href="#developer-tools">Developer tools</a>
       <a href="index.html#contact" class="nav-cta">Start a project</a>
@@ -39,7 +40,7 @@
         <div class="hero-copy">
           <p class="eyebrow"><span class="tick"></span>Demo project</p>
           <h1 class="hero-title">See the idea,<br />not just the pitch.</h1>
-          <p class="hero-sub">We build practical tools, not just decks. Explore an agent-building prototype, browser-local spreadsheet checks, and small Python tools for LLM reliability, retrieval quality, and spend control.</p>
+          <p class="hero-sub">We build practical tools, not just decks. Explore AgentPath workflow trace checks, browser-local spreadsheet review, and small Python tools for LLM reliability, retrieval quality, and spend control.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#agentmine">See the demo</a>
             <a class="btn btn-ghost" href="#developer-tools">LLM developer tools</a>
@@ -169,6 +170,37 @@
           <p><a href="https://github.com/VitaPilot-AI/tokendiff">Source and usage notes on GitHub →</a></p>
         </li>
       </ul>
+    </section>
+
+
+    <!-- AGENTPATH -->
+    <section class="section" id="agentpath">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>AgentPath · local workflow trace reviewer</p>
+        <h2 class="section-title">One successful tool call does not prove the workflow worked.</h2>
+        <p class="section-lead">Compare an expected agent journey with a captured JSON trace. Check step order, values passed between tools, approval guards, tool errors, and repeated writes. The review runs in your browser and does not invoke a model or connect to a server.</p>
+      </div>
+      <ul class="grid cards cards-3">
+        <li class="card">
+          <span class="card-tag">Sequence</span>
+          <h3>Expected steps, in order</h3>
+          <p>Flag missing steps, an unexpected tool, an error result, or an event outside the declared workflow.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Handoff</span>
+          <h3>Keep the right entity</h3>
+          <p>Capture an ID or version from one result and require later tool arguments to carry that exact value.</p>
+        </li>
+        <li class="card">
+          <span class="card-tag">Side effects</span>
+          <h3>Make approval checks visible</h3>
+          <p>Require a prior captured approval before a write, flag repeated writes, and download a JSON findings report.</p>
+        </li>
+      </ul>
+      <div class="hero-actions" style="margin-top:1.75rem">
+        <a class="btn btn-primary" href="demos/agentpath/">Try AgentPath</a>
+        <a class="btn btn-ghost" href="https://github.com/VitaPilot-AI/VitaPilot-AI.github.io/tree/main/demos/agentpath">View source on GitHub</a>
+      </div>
     </section>
 
 
