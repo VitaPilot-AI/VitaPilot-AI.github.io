@@ -25,10 +25,9 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="index.html#capabilities">Capabilities</a>
       <a href="index.html#who">Who we help</a>
-      <a href="#agentpath">Demos</a>
-      <a href="#agentpath">Agent workflows</a>
-      <a href="#csv-flight-check">Data tools</a>
-      <a href="#developer-tools">Developer tools</a>
+      <a href="#browser">Browser demos</a>
+      <a href="#packages">Python tools</a>
+      <a href="#services">Fixed-scope work</a>
       <a href="index.html#contact" class="nav-cta">Start a project</a>
     </nav>
   </header>
@@ -38,214 +37,142 @@
     <section class="hero hero-simple">
       <div class="hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="tick"></span>Demo project</p>
-          <h1 class="hero-title">See the idea,<br />not just the pitch.</h1>
-          <p class="hero-sub">We build practical tools, not just decks. Explore AgentPath workflow trace checks, browser-local spreadsheet review, and small Python tools for LLM reliability, retrieval quality, and spend control.</p>
+          <p class="eyebrow"><span class="tick"></span>Demos &amp; open source</p>
+          <h1 class="hero-title">Things you can<br />actually run.</h1>
+          <p class="hero-sub">Not screenshots. Three tools that run in this browser tab without uploading your file, and four Python packages you can install in one command. Every one of them states plainly what it does not do.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="demos/agentpath/">Try AgentPath</a>
-            <a class="btn btn-ghost" href="#developer-tools">LLM developer tools</a>
+            <a class="btn btn-primary" href="#browser">Run one in your browser</a>
+            <a class="btn btn-ghost" href="#packages">Install a Python tool</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AGENTMINE -->
-    <section class="section" id="agentmine">
+    <!-- GROUP 1: BROWSER DEMOS -->
+    <section class="section" id="browser">
       <div class="section-head">
-        <p class="eyebrow"><span class="tick"></span>AgentMine</p>
-        <h2 class="section-title">Build an agent the way you'd build a checklist.</h2>
-        <p class="section-lead">AgentMine is a private development preview for assembling and observing agent workflows. It is not a public hosted demo. The local mock mode runs without an API key; live Anthropic calls require your own key and may incur provider charges. The current prototype uses mocked MCP connectors.</p>
+        <p class="eyebrow"><span class="tick"></span>Run it in your browser</p>
+        <h2 class="section-title">Open a file, get an answer, keep the file.</h2>
+        <p class="section-lead">No account, no install, no upload. These run entirely in the page you are looking at &mdash; your data stays in the tab and is never sent to VitaPilot AI or to a model.</p>
       </div>
 
       <ul class="grid cards cards-3">
         <li class="card">
-          <span class="card-tag">Build</span>
-          <h3>Stack simple blocks</h3>
-          <p>Arrange workflow steps and equip the model with tools, memory, or knowledge in the local preview.</p>
+          <span class="card-tag">AgentPath</span>
+          <h3>Did the workflow do the right work?</h3>
+          <p><strong>The problem:</strong> every tool call returned 200, and the agent still did the wrong thing. <strong>What it does:</strong> checks a captured JSON trace against the steps you expected &mdash; order, values handed between calls, approval guards, errors, repeated writes. <strong>The limit:</strong> a pass means the trace matched your checks, not that the real-world effect was correct.</p>
+          <p style="margin-top:1rem"><a href="demos/agentpath/">Review a trace &rarr;</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">Run</span>
-          <h3>Watch it think</h3>
-          <p>Run the built-in meeting-summary scenario in mock mode and follow the execution events in the debug feed.</p>
+          <span class="card-tag">CSV Flight Check</span>
+          <h3>Will this file import cleanly?</h3>
+          <p><strong>The problem:</strong> the import fails at row 4,000, or worse, succeeds and quietly corrupts a column. <strong>What it does:</strong> flags ragged rows, stray whitespace, duplicate rows, mixed date styles and formula-like cells, then applies only the fixes you pick. <strong>The limit:</strong> ambiguous values are flagged for a person, never guessed.</p>
+          <p style="margin-top:1rem"><a href="demos/csv-flight-check/">Check a file &rarr;</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">Practice</span>
-          <h3>Test it before it matters</h3>
-          <p>Use the offline mock to explore the build-and-review loop. The preview does not connect to real business systems.</p>
+          <span class="card-tag">AgentMine &middot; preview</span>
+          <h3>What will this agent do before it does it?</h3>
+          <p><strong>The problem:</strong> agent behaviour is hard to reason about until it has already run. <strong>What it does:</strong> assembles an agent from reusable blocks and simulates it step by step against realistic scenarios, in plain language. <strong>The limit:</strong> this one is an internal preview &mdash; there is no public build to click yet.</p>
+          <p style="margin-top:1rem"><a href="index.html#contact">Ask for a walkthrough &rarr;</a></p>
         </li>
       </ul>
-      <div class="hero-actions" style="margin-top:1.75rem">
-        <a class="btn btn-primary" href="mailto:info@vitapilotai.com?subject=AgentMine%20private%20preview%20%E2%80%94%20VitaPilot%20AI">Ask about the private preview</a>
-        <a class="btn btn-ghost" href="demos/agentpath/">Try public AgentPath</a>
-      </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="section approach">
+    <!-- GROUP 2: PYTHON PACKAGES -->
+    <section class="section" id="packages">
       <div class="section-head">
-        <p class="eyebrow"><span class="tick"></span>How it works</p>
-        <h2 class="section-title">From a blank canvas to a working agent.</h2>
+        <p class="eyebrow"><span class="tick"></span>Install from PyPI</p>
+        <h2 class="section-title">Four narrow tools for LLM reliability and cost.</h2>
+        <p class="section-lead">MIT licensed, zero dependencies, Python 3.10+, tested on 3.10 through 3.13. Each answers one question and refuses to pretend it answers the others. They compose, but none of them needs the rest.</p>
       </div>
 
+      <ul class="grid cards">
+        <li class="card">
+          <span class="card-tag">pip install flakelens</span>
+          <h3>Is this failure real, or just flaky?</h3>
+          <p><strong>The problem:</strong> a case fails once and you cannot tell a broken prompt from an unlucky roll. <strong>What it does:</strong> runs each case N times and splits broken from flaky, with a Wilson interval &mdash; 10/10 is reported as &ge;72% true pass rate, not 100%. <strong>The limit:</strong> deterministic checks only; it does not judge whether prose is good.</p>
+          <p style="margin-top:1rem"><a href="flakelens/">Details</a> &middot; <a href="https://github.com/VitaPilot-AI/flakelens">Source</a></p>
+        </li>
+        <li class="card">
+          <span class="card-tag">pip install retrievalcheck</span>
+          <h3>Did retrieval find the right chunk?</h3>
+          <p><strong>The problem:</strong> the answer was wrong and you cannot tell whether the model failed or retrieval never found the passage. <strong>What it does:</strong> measures recall@k and MRR, and the character-weighted share of context you paid for that was irrelevant. <strong>The limit:</strong> you supply the ground truth; it refuses to score queries without it.</p>
+          <p style="margin-top:1rem"><a href="https://github.com/VitaPilot-AI/retrievalcheck">Source</a></p>
+        </li>
+        <li class="card">
+          <span class="card-tag">pip install tokendiff</span>
+          <h3>Did this prompt change break anything?</h3>
+          <p><strong>The problem:</strong> trimming a prompt saves money and quietly damages a handful of cases. <strong>What it does:</strong> reports the token and cost delta alongside which cases flipped, and calls a cheaper-but-damaging change a trade rather than a win. <strong>The limit:</strong> it names the casualties; deciding if the trade is worth it is yours.</p>
+          <p style="margin-top:1rem"><a href="https://github.com/VitaPilot-AI/tokendiff">Source</a></p>
+        </li>
+        <li class="card">
+          <span class="card-tag">pip install llmbudget</span>
+          <h3>What stops a runaway agent loop?</h3>
+          <p><strong>The problem:</strong> a retry loop bills you for every iteration and the dashboard tells you tomorrow. <strong>What it does:</strong> enforces a hard ceiling on dollars, tokens or call count and raises the moment one is breached. <strong>The limit:</strong> a guardrail, not an invoice &mdash; cached input and batch discounts are not modelled.</p>
+          <p style="margin-top:1rem"><a href="https://github.com/VitaPilot-AI/llmbudget">Source</a></p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- WHERE EACH FITS -->
+    <section class="section approach" id="fit">
+      <div class="section-head">
+        <p class="eyebrow"><span class="tick"></span>Where each one fits</p>
+        <h2 class="section-title">Different questions, different points in the life of a change.</h2>
+      </div>
       <ol class="steps">
         <li class="step">
           <span class="step-no">01</span>
           <div class="step-body">
-            <h3>Describe the goal</h3>
-            <p>Start with what you want the agent to do — the task, not the technology.</p>
+            <h3>Before you merge</h3>
+            <p><strong>tokendiff</strong> compares the old prompt with the new one and fails the build if tokens climb or cases break. <strong>flakelens</strong> tells you whether a failure is worth chasing.</p>
           </div>
         </li>
         <li class="step">
           <span class="step-no">02</span>
           <div class="step-body">
-            <h3>Assemble it</h3>
-            <p>Arrange the blocks in order and equip the agent with what it needs to get the job done.</p>
+            <h3>When the answer is wrong</h3>
+            <p><strong>retrievalcheck</strong> settles whether retrieval or generation is at fault, and how much irrelevant context you are paying to send. <strong>AgentPath</strong> does the same for a multi-step workflow.</p>
           </div>
         </li>
         <li class="step">
           <span class="step-no">03</span>
           <div class="step-body">
-            <h3>Run &amp; refine</h3>
-            <p>Watch it operate, catch what breaks, and fix it on the spot.</p>
+            <h3>While it runs</h3>
+            <p><strong>llmbudget</strong> caps what a block of code may spend, so a loop that goes wrong stops at your ceiling instead of at your credit limit.</p>
           </div>
         </li>
       </ol>
     </section>
 
-
-    <!-- FLAKELENS -->
-    <section class="section" id="flakelens">
+    <!-- GROUP 3: SERVICES -->
+    <section class="section" id="services">
       <div class="section-head">
-        <p class="eyebrow"><span class="tick"></span>flakelens · open source</p>
-        <h2 class="section-title">Is that LLM failure real, or did you just get unlucky?</h2>
-        <p class="section-lead">Your eval says 8&nbsp;/&nbsp;10 passed. That single number can't tell you whether the prompt is genuinely broken or merely nondeterministic — and those need opposite fixes. flakelens runs each case many times and separates them, with a confidence interval so you know how far to trust the split. Free, MIT-licensed, no dependencies.</p>
+        <p class="eyebrow"><span class="tick"></span>Fixed-scope work</p>
+        <h2 class="section-title">If you would rather we did it.</h2>
+        <p class="section-lead">Small, priced, bounded pieces of work with a written acceptance bar. We confirm scope by email before anything starts, and nothing is owed until the delivered work meets the stated criteria.</p>
       </div>
 
       <ul class="grid cards cards-3">
         <li class="card">
-          <span class="card-tag">Broken</span>
-          <h3>Fails every single run</h3>
-          <p>A real defect in the prompt or the chain. Deterministic, reproducible, and fixable — the report names exactly which check failed.</p>
+          <span class="card-tag">USD $25 &middot; 2 business days</span>
+          <h3>AgentPath Workflow Check Pack</h3>
+          <p>One agent workflow, up to 10 expected steps and 5 redacted traces in the documented AgentPath JSON format. You get a findings report tied to specific trace events, a JSON export, and a draft acceptance checklist. No credentials, no production access, no vendor trace conversion.</p>
+          <p style="margin-top:1rem"><a href="demos/agentpath/#pilot">Scope, sample report and payment &rarr;</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">Flaky</span>
-          <h3>Fails some of the time</h3>
-          <p>Usually temperature, prompt sensitivity, or retrieval nondeterminism. Reported with a pass rate and a 95% interval instead of a misleading pass/fail.</p>
+          <span class="card-tag">Scoped per file</span>
+          <h3>Reviewed spreadsheet cleanup</h3>
+          <p>We clean a real workbook, preserve the supplied source rows untouched, and return a change log showing every edit. Share only row and column counts first; the rules and delivery terms are agreed before any work begins.</p>
+          <p style="margin-top:1rem"><a href="https://brewpage.app/public/j3JXIg75Gw">See the offer &rarr;</a> &middot; <a href="demos/csv-flight-check/">Sample cleanup</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">Honest</span>
-          <h3>Ten green checks isn't proof</h3>
-          <p>At 10/10 the true pass rate is only <em>≥&nbsp;72%</em>. flakelens says so, and tells you 73 consecutive passes are needed before claiming 95%.</p>
+          <span class="card-tag">USD $150 &middot; 3 business days</span>
+          <h3>LLM Eval Smoke Test</h3>
+          <p>We take one LLM feature, build 25 cases from your real inputs, and hand back the harness plus a findings note naming each reproducible failure and each flaky one with its confidence interval. Acceptance: it runs on your machine with one command and names at least three reproducible failure modes, or certifies none at your chosen n.</p>
+          <p style="margin-top:1rem"><a href="mailto:dev@vitapilotai.com?subject=LLM%20Eval%20Smoke%20Test">Email dev@vitapilotai.com &rarr;</a></p>
         </li>
       </ul>
-
-      <div class="hero-actions" style="margin-top:1.75rem">
-        <a class="btn btn-primary" href="https://vitapilotai.com/flakelens/">See flakelens</a>
-        <a class="btn btn-ghost" href="https://github.com/VitaPilot-AI/flakelens">Source on GitHub</a>
-      </div>
-    </section>
-
-
-    <!-- LLM DEVELOPER TOOLS -->
-    <section class="section" id="developer-tools">
-      <div class="section-head">
-        <p class="eyebrow"><span class="tick"></span>Python developer tools · MIT licensed</p>
-        <h2 class="section-title">See the quality and cost changes behind an LLM result.</h2>
-        <p class="section-lead">Three small tools for teams evaluating prompts, agents, and retrieval. They use the measurements you provide; they do not call a model or intercept your provider traffic.</p>
-      </div>
-
-      <ul class="grid cards cards-3">
-        <li class="card">
-          <span class="card-tag">Spend guardrail</span>
-          <h3>llmbudget</h3>
-          <p>Set caller-recorded USD, token, and call ceilings. A breach raises immediately so runaway loops can stop. It is a guardrail, not a request proxy or invoice.</p>
-          <p><a href="https://github.com/VitaPilot-AI/llmbudget">Source and usage notes on GitHub →</a></p>
-        </li>
-        <li class="card">
-          <span class="card-tag">Retrieval audit</span>
-          <h3>retrievalcheck</h3>
-          <p>Score a retriever against labeled queries. Review recall, ranking, missed relevant chunks, and character-based context-waste estimates.</p>
-          <p><a href="https://github.com/VitaPilot-AI/retrievalcheck">Source and usage notes on GitHub →</a></p>
-        </li>
-        <li class="card">
-          <span class="card-tag">Prompt comparison</span>
-          <h3>tokendiff</h3>
-          <p>Compare two evaluation runs side by side: token and cost changes plus the individual cases that passed or failed after an edit.</p>
-          <p><a href="https://github.com/VitaPilot-AI/tokendiff">Source and usage notes on GitHub →</a></p>
-        </li>
-      </ul>
-    </section>
-
-
-    <!-- AGENTPATH -->
-    <section class="section" id="agentpath">
-      <div class="section-head">
-        <p class="eyebrow"><span class="tick"></span>AgentPath · local workflow trace reviewer</p>
-        <h2 class="section-title">One successful tool call does not prove the workflow worked.</h2>
-        <p class="section-lead">Compare an expected agent journey with a captured JSON trace. Check step order, values passed between tools, approval guards, tool errors, and repeated writes. The review runs in your browser and does not invoke a model or connect to a server.</p>
-      </div>
-      <ul class="grid cards cards-3">
-        <li class="card">
-          <span class="card-tag">Sequence</span>
-          <h3>Expected steps, in order</h3>
-          <p>Flag missing steps, an unexpected tool, an error result, or an event outside the declared workflow.</p>
-        </li>
-        <li class="card">
-          <span class="card-tag">Handoff</span>
-          <h3>Keep the right entity</h3>
-          <p>Capture an ID or version from one result and require later tool arguments to carry that exact value.</p>
-        </li>
-        <li class="card">
-          <span class="card-tag">Side effects</span>
-          <h3>Make approval checks visible</h3>
-          <p>Require a prior captured approval before a write, flag repeated writes, and download a JSON findings report.</p>
-        </li>
-      </ul>
-      <div class="hero-actions" style="margin-top:1.75rem">
-        <a class="btn btn-primary" href="demos/agentpath/">Try AgentPath</a>
-        <a class="btn btn-ghost" href="https://github.com/VitaPilot-AI/VitaPilot-AI.github.io/tree/main/demos/agentpath">View source on GitHub</a>
-      </div>
-      <article class="card" style="margin-top:1.5rem;max-width:920px">
-        <span class="card-tag">VitaPilot AI LLC · fixed-scope service · USD $25</span>
-        <h3>AgentPath Workflow Check Pack</h3>
-        <p>We review one agent workflow (up to 10 expected steps and 5 redacted AgentPath JSON traces) and return a trace-linked findings report plus an acceptance checklist within two business days after complete inputs and payment. No credentials or production access.</p>
-        <p><a href="demos/agentpath/#pilot">See the scope, sample report, and payment instructions →</a></p>
-      </article>
-    </section>
-
-
-    <!-- CSV FLIGHT CHECK -->
-    <section class="section" id="csv-flight-check">
-      <div class="section-head">
-        <p class="eyebrow"><span class="tick"></span>CSV Flight Check · data tool</p>
-        <h2 class="section-title">Catch CSV import problems before they become cleanup work.</h2>
-        <p class="section-lead">A small, local-first preflight for CSV and TSV files. It flags structural issues, whitespace, duplicate rows, mixed date styles, and formula-like cells. Choose the reversible fixes you want, preview the result, and export a cleaned copy plus an issue report. The file stays in your browser; nothing is uploaded.</p>
-      </div>
-
-      <ul class="grid cards cards-3">
-        <li class="card">
-          <span class="card-tag">Inspect</span>
-          <h3>See the shape of the file</h3>
-          <p>Check headers, row widths, blank rows, missing cells, and likely date-style inconsistencies before importing.</p>
-        </li>
-        <li class="card">
-          <span class="card-tag">Review</span>
-          <h3>Keep decisions visible</h3>
-          <p>Exact duplicates and whitespace are counted. Ambiguous values are flagged for a person to decide, never guessed.</p>
-        </li>
-        <li class="card">
-          <span class="card-tag">Export</span>
-          <h3>Take away a checked copy</h3>
-          <p>Apply only the cleanup rules you select, then download the result and a compact JSON issue report.</p>
-        </li>
-      </ul>
-
-      <div class="hero-actions" style="margin-top:1.75rem">
-        <a class="btn btn-primary" href="demos/csv-flight-check/">Try CSV Flight Check</a>
-        <a class="btn btn-ghost" href="https://github.com/VitaPilot-AI/VitaPilot-AI.github.io/tree/main/demos/csv-flight-check">View source</a>
-        <a class="btn btn-ghost" href="https://brewpage.app/public/j3JXIg75Gw">View the small cleanup offer</a>
-      </div>
-      <p class="section-lead" style="margin-top:1rem">Need someone to review a real workbook? <a href="index.html#contact">Ask VitaPilot AI about a small, fixed-scope cleanup</a>. We confirm the data rules and delivery terms before work begins.</p>
     </section>
 
     <!-- CONTACT -->
@@ -253,8 +180,8 @@
       <div class="contact-inner">
         <p class="eyebrow"><span class="tick"></span>Start a conversation</p>
         <h2 class="contact-title">Want something like this for your team?</h2>
-        <p class="contact-lead">This is one example of how we approach AI — practical, visible, and built around how people actually work. Let's talk about what that could look like for you.</p>
-        <a class="btn btn-primary btn-lg" href="mailto:info@vitapilotai.com?subject=Project%20inquiry%20—%20VitaPilot%20AI">Start a project</a>
+        <p class="contact-lead">These are the shapes we like to work in: small, testable, and honest about their edges. Tell us the problem and we will say plainly whether it is a fit.</p>
+        <a class="btn btn-primary btn-lg" href="mailto:info@vitapilotai.com?subject=Project%20inquiry%20%E2%80%94%20VitaPilot%20AI">Start a project</a>
         <p class="contact-email"><a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p>
       </div>
     </section>
