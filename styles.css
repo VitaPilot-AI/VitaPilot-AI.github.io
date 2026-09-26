@@ -531,7 +531,8 @@ a { color: inherit; }
 /* inline install command inside a card */
 .card code {
   font-family: var(--font-mono);
-  font-size: .78rem;
+  font-size: .7rem;
+  white-space: nowrap;
   color: var(--sky);
   background: rgba(255,255,255,.04);
   padding: .18em .5em;
