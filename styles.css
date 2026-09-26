@@ -527,3 +527,15 @@ a { color: inherit; }
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* inline install command inside a card */
+.card code {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--sky);
+  background: rgba(255,255,255,.04);
+  padding: .18em .5em;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: .5rem;
+}

@@ -88,28 +88,32 @@
 
       <ul class="grid cards">
         <li class="card">
-          <span class="card-tag">pip install flakelens</span>
+          <span class="card-tag">flakelens</span>
           <h3>Is this failure real, or just flaky?</h3>
-          <p><strong>The problem:</strong> a case fails once and you cannot tell a broken prompt from an unlucky roll. <strong>What it does:</strong> runs each case N times and splits broken from flaky, with a Wilson interval &mdash; 10/10 is reported as &ge;72% true pass rate, not 100%. <strong>The limit:</strong> deterministic checks only; it does not judge whether prose is good.</p>
-          <p style="margin-top:1rem"><a href="flakelens/">Details</a> &middot; <a href="https://github.com/VitaPilot-AI/flakelens">Source</a></p>
+          
+          <p><strong>The problem:</strong> a case fails once and you cannot tell a broken prompt from an unlucky roll. <strong>What it does:</strong> runs each case N times and splits broken from flaky, with a Wilson interval &mdash; 10/10 means &ge;72% true pass rate, not 100%. <strong>The limit:</strong> deterministic checks only.</p>
+          <p style="margin-top:1rem"><code>pip install flakelens</code><br><a href="flakelens/">Details</a> &middot; <a href="https://github.com/VitaPilot-AI/flakelens">Source</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">pip install retrievalcheck</span>
+          <span class="card-tag">retrievalcheck</span>
           <h3>Did retrieval find the right chunk?</h3>
-          <p><strong>The problem:</strong> the answer was wrong and you cannot tell whether the model failed or retrieval never found the passage. <strong>What it does:</strong> measures recall@k and MRR, and the character-weighted share of context you paid for that was irrelevant. <strong>The limit:</strong> you supply the ground truth; it refuses to score queries without it.</p>
-          <p style="margin-top:1rem"><a href="https://github.com/VitaPilot-AI/retrievalcheck">Source</a></p>
+          
+          <p><strong>The problem:</strong> the answer was wrong and you cannot tell whether the model failed or retrieval never found the passage. <strong>What it does:</strong> measures recall@k, MRR, and the share of context you paid for that was irrelevant. <strong>The limit:</strong> you supply the ground truth.</p>
+          <p style="margin-top:1rem"><code>pip install retrievalcheck</code><br><a href="https://github.com/VitaPilot-AI/retrievalcheck">Source</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">pip install tokendiff</span>
+          <span class="card-tag">tokendiff</span>
           <h3>Did this prompt change break anything?</h3>
-          <p><strong>The problem:</strong> trimming a prompt saves money and quietly damages a handful of cases. <strong>What it does:</strong> reports the token and cost delta alongside which cases flipped, and calls a cheaper-but-damaging change a trade rather than a win. <strong>The limit:</strong> it names the casualties; deciding if the trade is worth it is yours.</p>
-          <p style="margin-top:1rem"><a href="https://github.com/VitaPilot-AI/tokendiff">Source</a></p>
+          
+          <p><strong>The problem:</strong> trimming a prompt saves money and quietly damages a handful of cases. <strong>What it does:</strong> reports the token and cost delta next to which cases flipped, calling a cheaper-but-damaging change a trade, not a win. <strong>The limit:</strong> the decision stays yours.</p>
+          <p style="margin-top:1rem"><code>pip install tokendiff</code><br><a href="https://github.com/VitaPilot-AI/tokendiff">Source</a></p>
         </li>
         <li class="card">
-          <span class="card-tag">pip install llmbudget</span>
+          <span class="card-tag">llmbudget</span>
           <h3>What stops a runaway agent loop?</h3>
-          <p><strong>The problem:</strong> a retry loop bills you for every iteration and the dashboard tells you tomorrow. <strong>What it does:</strong> enforces a hard ceiling on dollars, tokens or call count and raises the moment one is breached. <strong>The limit:</strong> a guardrail, not an invoice &mdash; cached input and batch discounts are not modelled.</p>
-          <p style="margin-top:1rem"><a href="https://github.com/VitaPilot-AI/llmbudget">Source</a></p>
+          
+          <p><strong>The problem:</strong> a retry loop bills you for every iteration and the dashboard tells you tomorrow. <strong>What it does:</strong> enforces a hard ceiling on dollars, tokens or calls and raises the moment one is breached. <strong>The limit:</strong> a guardrail, not an invoice.</p>
+          <p style="margin-top:1rem"><code>pip install llmbudget</code><br><a href="https://github.com/VitaPilot-AI/llmbudget">Source</a></p>
         </li>
       </ul>
     </section>
