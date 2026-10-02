@@ -1,0 +1,171 @@
+{
+  "schema": "sheet-cleanup-report/v1",
+  "tool_version": "1.0.0",
+  "created_at": "2026-10-02T06:59:06.787189+00:00",
+  "source": {
+    "filename": "synthetic-orders.csv",
+    "bytes": 362,
+    "sha256": "db7a460be760fa7267b4785d56c7ab944194043f2640d1f3e1c6eb72f8bc0ec1",
+    "sheet": null
+  },
+  "options": {
+    "trim": true,
+    "remove_blank_rows": true,
+    "dedupe": true,
+    "max_rows": 25,
+    "max_columns": 10
+  },
+  "counts": {
+    "source_data_rows": 6,
+    "cleaned_data_rows": 4,
+    "columns": 5,
+    "trimmed_cells": 2,
+    "blank_rows_removed": 1,
+    "duplicate_rows_removed": 1,
+    "review_flags": 2
+  },
+  "row_map": [
+    {
+      "cleaned_row": 2,
+      "source_row": 2
+    },
+    {
+      "cleaned_row": 3,
+      "source_row": 5
+    },
+    {
+      "cleaned_row": 4,
+      "source_row": 6
+    },
+    {
+      "cleaned_row": 5,
+      "source_row": 7
+    }
+  ],
+  "changes": [
+    {
+      "operation": "trim",
+      "source_row": 2,
+      "column": 2,
+      "before": {
+        "type": "text",
+        "value": "  Alder Studio  ",
+        "number_format": "@"
+      },
+      "after": {
+        "type": "text",
+        "value": "Alder Studio",
+        "number_format": "@"
+      }
+    },
+    {
+      "operation": "trim",
+      "source_row": 2,
+      "column": 5,
+      "before": {
+        "type": "text",
+        "value": " Confirm address ",
+        "number_format": "@"
+      },
+      "after": {
+        "type": "text",
+        "value": "Confirm address",
+        "number_format": "@"
+      }
+    },
+    {
+      "operation": "remove_duplicate_row",
+      "source_row": 3,
+      "column": null,
+      "kept_source_row": 2,
+      "before": [
+        {
+          "type": "text",
+          "value": "000123",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "  Alder Studio  ",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "03/04/2026",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "0012.50",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": " Confirm address ",
+          "number_format": "@"
+        }
+      ],
+      "after": null
+    },
+    {
+      "operation": "remove_blank_row",
+      "source_row": 4,
+      "column": null,
+      "before": [
+        {
+          "type": "text",
+          "value": "",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "",
+          "number_format": "@"
+        },
+        {
+          "type": "text",
+          "value": "",
+          "number_format": "@"
+        }
+      ],
+      "after": null
+    }
+  ],
+  "review_flags": [
+    {
+      "source_row": 5,
+      "column": 5,
+      "code": "formula_like_text",
+      "detail": "Stored as literal text, never an executable formula; check before exporting to CSV."
+    },
+    {
+      "source_row": 6,
+      "column": 5,
+      "code": "missing_value",
+      "detail": "Missing value preserved; confirm whether it is intentional."
+    }
+  ],
+  "artifacts": {
+    "workbook": "cleaned.xlsx",
+    "source_copy": "source-original.csv",
+    "workbook_sha256": "26fe07d5d7919316a5012f166f4ee851c7645079fc7c9822d13f394934c11b88"
+  },
+  "notes": [
+    "Header row is preserved. Removal decisions use original source rows: remove blank/whitespace-only rows, exact source dedupe keeping first row, then trim retained text.",
+    "CSV/TSV values remain text. XLSX existing cell types and number formats are preserved without parsing text.",
+    "Duplicate equality includes value type and number format; no case folding, fuzzy match or key-based merge.",
+    "Source sheet is a static value snapshot. Original bytes are in source-original; unrelated workbook features are not copied.",
+    "Empty text and blank cells may display identically in Excel. Original bytes are authoritative.",
+    "Review flags cover implemented mechanical checks only; a human must review the result before delivery."
+  ]
+}

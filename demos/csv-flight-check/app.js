@@ -4,7 +4,7 @@ const MAX_BYTES = 10 * 1024 * 1024;
 const DELIMITERS = [",", "\t", ";", "|"];
 const SAMPLE = `invoice_id,customer,order_date,amount,status\nA-1001," Acme Labs ",2026-09-01,125.00,paid\nA-1002,Nimbus Tools,09/02/2026,48.00,paid\nA-1002,Nimbus Tools,09/02/2026,48.00,paid\nA-1003,"Lark & Co",2026/09/03,,pending\nA-1004,"Morrow Supply ",2026-09-04,82.50,paid\nA-1005,"=HYPERLINK(""https://example.com"",""view"")",2026-09-05,-5.00,pending\n,,,,\n`;
 
-const state = { rows: null, filename: "", delimiter: ",", report: null };
+const state = { rows: null, filename: "", delimiter: ",", report: null, loadVersion: 0 };
 const ui = {
   input: document.getElementById("file-input"),
   drop: document.getElementById("drop-zone"),
@@ -27,6 +27,7 @@ const ui = {
   download: document.getElementById("download-button"),
   reportDownload: document.getElementById("report-button"),
   clear: document.getElementById("clear-button"),
+  service: document.getElementById("service-link"),
 };
 
 function setStatus(message, isError = false) {
@@ -34,11 +35,12 @@ function setStatus(message, isError = false) {
   ui.status.classList.toggle("error", isError);
 }
 
-function parseDelimited(text, delimiter) {
+function parseDelimited(text, delimiter, maxRows = Infinity) {
   const rows = [];
   let row = [];
   let field = "";
   let quoted = false;
+  let closedQuote = false;
 
   for (let i = 0; i < text.length; i += 1) {
     const ch = text[i];
@@ -48,21 +50,28 @@ function parseDelimited(text, delimiter) {
         i += 1;
       } else if (ch === '"') {
         quoted = false;
+        closedQuote = true;
       } else {
         field += ch;
       }
-    } else if (ch === '"' && field.length === 0) {
+    } else if (ch === '"' && field.length === 0 && !closedQuote) {
       quoted = true;
     } else if (ch === delimiter) {
       row.push(field);
       field = "";
+      closedQuote = false;
     } else if (ch === "\n" || ch === "\r") {
       if (ch === "\r" && text[i + 1] === "\n") i += 1;
       row.push(field);
       rows.push(row);
+      if (rows.length >= maxRows) return rows;
       row = [];
       field = "";
+      closedQuote = false;
     } else {
+      if (closedQuote || ch === '"') {
+        throw new Error("This file has a quote inside an unquoted field or text after a closing quote. Correct the CSV and try again.");
+      }
       field += ch;
     }
   }
@@ -71,23 +80,23 @@ function parseDelimited(text, delimiter) {
     row.push(field);
     rows.push(row);
   }
-  while (rows.length && rows[rows.length - 1].every((cell) => cell.trim() === "")) rows.pop();
   return rows;
 }
 
 function detectDelimiter(text) {
-  const sample = text.slice(0, 100000);
   let best = { delimiter: ",", score: -1 };
   for (const delimiter of DELIMITERS) {
     let rows;
-    try { rows = parseDelimited(sample, delimiter).slice(0, 30); } catch { continue; }
+    // Stop at complete records, never halfway through a long quoted field.
+    try { rows = parseDelimited(text, delimiter, 30); } catch { continue; }
     const widths = rows.filter((row) => row.some((cell) => cell.trim() !== "")).map((row) => row.length);
     if (!widths.length) continue;
     const counts = new Map();
     widths.forEach((width) => counts.set(width, (counts.get(width) || 0) + 1));
-    const consistent = Math.max(...counts.values());
-    const columns = Math.max(...widths);
-    const score = (columns > 1 ? 100 : 0) + (consistent / widths.length) * 10 + Math.min(columns, 30) / 100;
+    const [columns, consistent] = [...counts.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0];
+    // The first record defines the header in this tool. Keep its delimiter
+    // evidence even when most data records have missing columns to report.
+    const score = (rows[0].length > 1 ? 1000 : columns > 1 ? 100 : 0) + (consistent / widths.length) * 10 + (rows[0].length === columns ? 1 : 0) + Math.min(columns, 30) / 100;
     if (score > best.score) best = { delimiter, score };
   }
   return best.delimiter;
@@ -105,10 +114,11 @@ function dateStyle(value) {
 }
 
 function isFormulaLike(value) {
-  const cell = value.trimStart();
-  if (/^[=@]/.test(cell)) return true;
-  if (/^[+-]\s*(?:[A-Za-z@({]|[-+]\s*\d)/.test(cell)) return true;
-  return /^[+-]\s*\d+(?:\.\d+)?\s*[*\/^+-]\s*\d/.test(cell);
+  const cell = value.replace(/^[\s\u0000-\u001f]+/, "");
+  if (!/^[=@+-]/.test(cell)) return false;
+  // Signed decimal/scientific numbers are values. All other operator-led
+  // expressions receive protection, including +1+SUM(...) and -1+cmd|....
+  return !/^[+-](?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?\s*$/.test(cell);
 }
 
 function audit(rows, delimiter) {
@@ -125,7 +135,7 @@ function audit(rows, delimiter) {
   const blankRows = data.length - nonBlankData.length;
   let whitespaceCells = 0;
   let emptyCells = 0;
-  let formulaCells = 0;
+  let formulaCells = header.filter(isFormulaLike).length;
   const duplicateRows = new Map();
   for (const row of nonBlankData) {
     row.forEach((cell) => {
@@ -140,7 +150,7 @@ function audit(rows, delimiter) {
   const dateColumns = [];
   for (let col = 0; col < header.length; col += 1) {
     const styles = new Set(nonBlankData.map((row) => dateStyle(row[col] || "")).filter(Boolean));
-    if (styles.size > 1) dateColumns.push(header[col].trim() || `Column ${col + 1}`);
+    if (styles.size > 1) dateColumns.push(`Column ${col + 1}`);
   }
 
   const add = (key, label, count, detail, severity = "review") => {
@@ -155,7 +165,7 @@ function audit(rows, delimiter) {
   if (whitespaceCells) add("whitespace", "Cells with extra spaces", whitespaceCells, "Trimming is optional and leaves the original file untouched.");
   if (exactDuplicates) add("duplicates", "Exact duplicate data rows", exactDuplicates, "Only identical rows are counted. No fuzzy matching is used.");
   if (dateColumns.length) add("mixed_dates", "Columns with mixed date styles", dateColumns.length, `Review these columns; dates are never inferred or rewritten: ${dateColumns.join(", ")}.`);
-  if (formulaCells) add("formula_like", "Formula-like cell values", formulaCells, "Values beginning with =, @, or an operator expression may be interpreted as formulas. Ordinary signed numbers are left unchanged.");
+  if (formulaCells) add("formula_like", "Formula-like cell values", formulaCells, "Headers and values beginning with =, @, or an operator expression may be interpreted as formulas. Signed decimal and scientific numbers are left unchanged.");
   if (!issues.length) add("clean", "No obvious structural issues", 0, "The basic checks found no issues. Review your destination system's import rules too.", "ok");
 
   return {
@@ -180,7 +190,6 @@ function audit(rows, delimiter) {
 function getOutputRows() {
   if (!state.rows) return [];
   let rows = state.rows.map((row) => row.slice());
-  if (ui.trim.checked) rows = rows.map((row) => row.map((cell) => cell.trim()));
   if (ui.blank.checked) rows = rows.filter((row, index) => index === 0 || !isBlankRow(row));
   if (ui.duplicates.checked && rows.length > 1) {
     const head = rows[0];
@@ -194,6 +203,8 @@ function getOutputRows() {
     });
     rows = [head, ...body];
   }
+  // Compare duplicates against the source values, before optional trimming.
+  if (ui.trim.checked) rows = rows.map((row) => row.map((cell) => cell.trim()));
   if (ui.formula.checked) {
     rows = rows.map((row) => row.map((cell) => (isFormulaLike(cell) ? `'${cell}` : cell)));
   }
@@ -239,6 +250,10 @@ function renderTable(rows) {
 function render() {
   if (!state.rows) return;
   state.report = audit(state.rows, state.delimiter);
+  if (ui.service) {
+    const columns = state.rows.reduce((max, row) => Math.max(max, row.length), 0);
+    ui.service.href = `../../services/spreadsheet-cleanup/?rows=${state.report.source_rows_including_blanks}&columns=${columns}`;
+  }
   const outputRows = getOutputRows();
   ui.results.classList.remove("hidden");
   ui.name.textContent = state.filename;
@@ -282,16 +297,32 @@ function render() {
   const selected = [];
   if (ui.trim.checked) selected.push("trim spaces");
   if (ui.blank.checked) selected.push("skip blank rows");
-  if (ui.duplicates.checked) selected.push("remove exact duplicates");
+  if (ui.duplicates.checked) selected.push("remove exact source duplicates before trimming");
   if (ui.formula.checked) selected.push("protect formula-like values");
   ui.optionNote.textContent = selected.length ? `Selected for the exported copy: ${selected.join(", ")}. The source rows remain unchanged.` : "No cleanup is applied until you select a rule. Ambiguous values are never inferred.";
   renderTable(outputRows);
 }
 
-function loadText(text, filename) {
-  const delimiter = detectDelimiter(text);
-  const rows = parseDelimited(text.replace(/^\uFEFF/, ""), delimiter);
-  if (!rows.length || rows[0].length < 1) throw new Error("No CSV rows were found in this file.");
+function clearFileState() {
+  state.rows = null;
+  state.filename = "";
+  state.delimiter = ",";
+  state.report = null;
+  ui.results.classList.add("hidden");
+  // Remove retained cell values from the DOM as well as from application state.
+  [ui.name, ui.shape, ui.count, ui.metrics, ui.issues, ui.preview, ui.previewCount, ui.delimiter, ui.optionNote].forEach((element) => element.replaceChildren());
+  [ui.trim, ui.blank, ui.duplicates, ui.formula].forEach((option) => { option.checked = false; });
+  if (ui.service) ui.service.href = "../../services/spreadsheet-cleanup/";
+}
+
+function loadText(text, filename, version = ++state.loadVersion) {
+  if (version !== state.loadVersion) return;
+  clearFileState();
+  const source = text.replace(/^\uFEFF/, "");
+  if (source.includes("\u0000")) throw new Error("This file contains null characters. Export it as UTF-8 CSV or TSV and try again.");
+  const delimiter = /\.tsv$/i.test(filename) ? "\t" : detectDelimiter(source);
+  const rows = parseDelimited(source, delimiter);
+  if (!rows.length || rows.every(isBlankRow)) throw new Error("No CSV values were found in this file.");
   state.rows = rows;
   state.filename = filename;
   state.delimiter = delimiter;
@@ -302,15 +333,23 @@ function loadText(text, filename) {
 
 async function loadFile(file) {
   if (!file) return;
+  const version = ++state.loadVersion;
+  clearFileState();
   if (file.size > MAX_BYTES) {
     setStatus("This file is larger than 10 MB. Choose a smaller CSV or TSV.", true);
     return;
   }
+  setStatus(`Reading ${file.name} locally…`);
   try {
-    loadText(await file.text(), file.name);
+    const buffer = await file.arrayBuffer();
+    if (version !== state.loadVersion) return;
+    let text;
+    try { text = new TextDecoder("utf-8", { fatal: true }).decode(buffer); }
+    catch { throw new Error("This file is not valid UTF-8. Export it as UTF-8 CSV or TSV and try again."); }
+    loadText(text, file.name, version);
   } catch (error) {
-    state.rows = null;
-    ui.results.classList.add("hidden");
+    if (version !== state.loadVersion) return;
+    clearFileState();
     setStatus(error instanceof Error ? error.message : "Could not read this file.", true);
   }
 }
@@ -334,11 +373,13 @@ ui.sample.addEventListener("click", () => {
 [ui.trim, ui.blank, ui.duplicates, ui.formula].forEach((option) => option.addEventListener("change", render));
 ui.download.addEventListener("click", () => {
   if (!state.rows) return;
-  const output = getOutputRows().map((row) => row.map((cell) => csvEscape(cell, state.delimiter)).join(state.delimiter)).join("\r\n");
-  downloadBlob(`checked-${state.filename.replace(/\.[^.]+$/, "")}.csv`, "text/csv;charset=utf-8", `\uFEFF${output}`);
+  // A final terminator preserves an explicitly blank last record on re-import.
+  const output = getOutputRows().map((row) => row.map((cell) => csvEscape(cell, state.delimiter)).join(state.delimiter)).join("\r\n") + "\r\n";
+  const isTsv = state.delimiter === "\t";
+  downloadBlob(`checked-${state.filename.replace(/\.[^.]+$/, "")}.${isTsv ? "tsv" : "csv"}`, `${isTsv ? "text/tab-separated-values" : "text/csv"};charset=utf-8`, `\uFEFF${output}`);
 });
 ui.reportDownload.addEventListener("click", () => {
-  if (!state.report) return;
+  if (!state.rows || !state.report) return;
   const report = {
     ...state.report,
     exported_at: new Date().toISOString(),
@@ -353,11 +394,9 @@ ui.reportDownload.addEventListener("click", () => {
   downloadBlob(`${state.filename.replace(/\.[^.]+$/, "")}-flight-report.json`, "application/json;charset=utf-8", `${JSON.stringify(report, null, 2)}\n`);
 });
 ui.clear.addEventListener("click", () => {
-  state.rows = null;
-  state.filename = "";
-  state.report = null;
+  state.loadVersion += 1;
+  clearFileState();
   ui.input.value = "";
-  ui.results.classList.add("hidden");
   setStatus("Cleared. Your file data is no longer held by this page.");
 });
 ui.drop.addEventListener("dragover", (event) => { event.preventDefault(); ui.drop.classList.add("dragging"); });

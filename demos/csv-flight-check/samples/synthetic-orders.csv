@@ -1,0 +1,7 @@
+Order ID,Customer,Date text,Amount text,Note
+000123,  Alder Studio  ,03/04/2026,0012.50, Confirm address 
+000123,  Alder Studio  ,03/04/2026,0012.50, Confirm address 
+,,,,
+000124,Beacon Workshop,2026-10-01,0,"=HYPERLINK(""https://example.invalid"",""example"")"
+000125,Cedar Supply,not a date,12.00,
+000126,Cedar Supply,2026-10-02,12.00,Keep this separate order

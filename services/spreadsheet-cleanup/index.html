@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Small Spreadsheet Cleanup — $15 | VitaPilot AI</title>
+  <meta name="description" content="A reviewed cleanup of one small CSV or Excel table for USD $15. Original file preserved, cleaned workbook, every change documented. Confirm scope before paying.">
+  <link rel="canonical" href="https://vitapilotai.com/services/spreadsheet-cleanup/">
+  <meta property="og:title" content="Small Spreadsheet Cleanup — $15 | VitaPilot AI">
+  <meta property="og:description" content="Turn a messy small table into a checked workbook, with the original preserved and a change log. One business day after scope confirmation and complete inputs.">
+  <meta property="og:url" content="https://vitapilotai.com/services/spreadsheet-cleanup/">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="service.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <a class="brand" href="../../"><span class="brand-name">VitaPilot<span class="brand-ai">AI</span></span></a>
+    <nav class="nav-links" aria-label="Primary"><a href="../../demos/csv-flight-check/">Free CSV check</a><a href="#request" class="nav-cta">Request cleanup</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero service-hero">
+      <div>
+        <p class="eyebrow"><span class="tick"></span>VitaPilot AI LLC · Spreadsheet service</p>
+        <h1 class="hero-title">A cleaner spreadsheet.<br>A record of every change.</h1>
+        <p class="hero-sub">Send a small, non-sensitive table. Get a checked Excel workbook with your original data, cleaned rows, and a change log you can follow.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#request">Prepare a request</a><a class="btn btn-ghost" href="../../demos/csv-flight-check/samples/vitapilot-synthetic-spreadsheet-cleanup.xlsx" download>See an example workbook</a></div>
+        <p class="fine">Fictional example: 6 source rows become 4, with every removal recorded. <a href="../../demos/csv-flight-check/samples/synthetic-orders.csv" download>Source CSV</a> · <a href="../../demos/csv-flight-check/samples/synthetic-cleanup-report.json" download>Change report</a>. Scope is confirmed by email before work or payment.</p>
+      </div>
+      <aside class="price-panel" aria-label="Package price and scope">
+        <span class="eyebrow">Small table cleanup</span>
+        <p class="price">$15 <span>USD / file</span></p>
+        <ul><li>One table · up to 25 data rows</li><li>Up to 10 columns · CSV, TSV, or XLSX</li><li>One business day after complete inputs and scope confirmation</li><li>One correction within the agreed scope</li></ul>
+        <a href="#included">See exactly what is included ↓</a>
+      </aside>
+    </section>
+
+    <section class="section compact" id="included">
+      <div class="section-head"><p class="eyebrow"><span class="tick"></span>Your delivery</p><h2 class="section-title">Useful output. Traceable edits.</h2></div>
+      <div class="deliverables">
+        <article class="card"><span class="card-tag">01 · Preserve</span><h3>Your source, intact</h3><p>An unchanged copy of your original file, plus a source-data worksheet in the delivery workbook.</p></article>
+        <article class="card"><span class="card-tag">02 · Clean</span><h3>Only the agreed changes</h3><p>Trim outer spaces, remove fully blank rows, and remove exact duplicate source rows. Choose the rules; IDs and ambiguous dates stay as supplied.</p></article>
+        <article class="card"><span class="card-tag">03 · Review</span><h3>A change log and checks</h3><p>Cell changes, removed row references, before-and-after row counts, and values that still need your decision.</p></article>
+      </div>
+      <p class="fine">This package handles values-only tables up to 5 MB. It excludes formulas, macros, merged cells, dashboards, fuzzy matching, research, and data entry from images. Layout and workbook styling are not reproduced. Larger files need a separate written quote.</p>
+    </section>
+
+    <section class="section compact" id="request">
+      <div class="section-head"><p class="eyebrow"><span class="tick"></span>Start with the shape of your file</p><h2 class="section-title">Prepare your cleanup request.</h2><p class="section-lead">No file upload and no payment here. This form creates a brief to send to <a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a>. We confirm fit, price, timing, and how to share the file in our reply.</p></div>
+      <form id="request-form">
+        <div class="form-grid">
+          <label>File format<select id="format" required><option value="CSV">CSV</option><option value="TSV">TSV</option><option value="XLSX">Excel (.xlsx), values only</option></select></label>
+          <label>Data rows, excluding header<input id="rows" type="number" min="1" max="1000000" step="1" inputmode="numeric" required placeholder="e.g. 20"></label>
+          <label>Columns<input id="columns" type="number" min="1" max="16384" step="1" inputmode="numeric" required placeholder="e.g. 6"></label>
+          <label>File size<select id="file-size" required><option value="">Choose…</option><option value="within">5 MB or less</option><option value="over">More than 5 MB</option><option value="unknown">Not sure yet</option></select></label>
+        </div>
+        <fieldset><legend>What should we do?</legend>
+          <label class="check"><input type="checkbox" name="rule" value="Trim leading and trailing spaces">Trim leading and trailing spaces</label>
+          <label class="check"><input type="checkbox" name="rule" value="Remove fully blank rows">Remove fully blank rows</label>
+          <label class="check"><input type="checkbox" name="rule" value="Remove exact duplicate source rows, keeping the first">Remove exact duplicate source rows, keeping the first</label>
+          <label class="check"><input type="checkbox" name="rule" value="Review only; do not change any values">Review only; do not change any values</label>
+        </fieldset>
+        <label>Anything we should know? <span class="fine">Optional. Describe the task without including names, records, passwords, or other sensitive data.</span><textarea id="notes" rows="3" maxlength="600" placeholder="For example: Keep leading zeros in product codes."></textarea></label>
+        <label class="check consent"><input id="scope-check" type="checkbox" required>I understand this is a request, not an accepted order. I will only send non-sensitive data I have permission to share, after the scope is confirmed.</label>
+        <p id="fit-status" class="fit-status" role="status" aria-live="polite">Enter row and column counts to check the package size.</p>
+        <button class="btn btn-primary" type="submit">Create request brief</button>
+        <p class="fine">Details stay in this tab until you choose to email, copy, or download them. Creating a brief does not send it.</p>
+      </form>
+      <section id="brief-section" class="brief-panel" aria-labelledby="brief-heading" hidden>
+        <h3 id="brief-heading" tabindex="-1">Your request is ready to send</h3>
+        <p id="brief-status" role="status">Nothing has been sent. Open your email app, or copy the brief into an email to info@vitapilotai.com.</p>
+        <label for="brief">Request brief</label><textarea id="brief" rows="13" readonly spellcheck="false"></textarea>
+        <div class="hero-actions"><a id="email-brief" class="btn btn-primary" href="mailto:info@vitapilotai.com">Open email draft</a><button id="copy-brief" class="btn btn-ghost" type="button">Copy brief</button><button id="download-brief" class="btn btn-ghost" type="button">Download brief</button></div>
+        <p class="fine">Send the email to submit your request. Keep the reference in the subject for scope confirmation, delivery, and payment.</p>
+      </section>
+      <noscript><p>Email info@vitapilotai.com with the format, row count, column count, file size, and cleanup rules you need. Do not attach source data until scope and the sharing method are confirmed.</p></noscript>
+    </section>
+
+    <section class="section compact" id="how-it-works">
+      <div class="section-head"><p class="eyebrow"><span class="tick"></span>From request to delivery</p><h2 class="section-title">A small job, agreed in writing.</h2></div>
+      <ol class="steps">
+        <li class="step"><span class="step-no">01</span><div class="step-body"><h3>Confirm the brief</h3><p>Email your request. We confirm the rules, USD $15 price for an in-scope table, delivery date, and file-sharing method. An automated brief does not reserve a delivery slot.</p></div></li>
+        <li class="step"><span class="step-no">02</span><div class="step-body"><h3>Review the delivery</h3><p>After scope is agreed and complete inputs arrive, we return the original, cleaned workbook, and change log within one business day. Check the agreed rules and row counts; one correction is included.</p></div></li>
+        <li class="step"><span class="step-no">03</span><div class="step-body"><h3>Pay for the accepted work</h3><p>Once the delivery meets the agreed criteria, pay the confirmed USD amount using our Stripe checkout. Reply on the same email thread with the receipt reference so we can match the payment to your request.</p></div></li>
+      </ol>
+      <details class="payment"><summary>Already received and accepted your delivery? Payment instructions</summary><p>Use the link only for a confirmed VitaPilot order. The checkout item is labeled “service” and asks you to enter an amount. For this package, enter <strong>15.00 USD</strong>. A larger quote may differ. Stop if the business, currency, or total does not match your written agreement.</p><a class="btn btn-ghost" href="https://buy.stripe.com/3cIcN5dbJdxPbK7dgQfbq01" target="_blank" rel="noopener noreferrer">Open Stripe checkout</a><p class="fine">Opening checkout is not payment confirmation. Card details are handled by Stripe. We match payments manually; do not send card numbers by email.</p></details>
+    </section>
+
+    <section class="section compact faq" id="questions">
+      <div class="section-head"><h2 class="section-title">Before you send a file.</h2></div>
+      <details><summary>Can I do it myself for free?</summary><p>Yes. <a href="../../demos/csv-flight-check/">CSV Flight Check</a> runs locally in your browser. It checks a CSV or TSV, previews your chosen cleanup rules, and exports a separate CSV and issue report. The paid service adds a reviewed Excel delivery and a change log.</p></details>
+      <details><summary>What counts as a duplicate?</summary><p>An entire source row with the same values in every column. We keep its first occurrence. We do not merge records based on a shared name, ID, or approximate match. Trimming two different rows into the same values does not authorize deleting one.</p></details>
+      <details><summary>Will you fix dates, formulas, or missing values?</summary><p>We flag ambiguous or missing values. We do not guess dates or invent values. The $15 package does not repair formulas or accept formula-bearing workbooks. Export a values-only copy or ask about a separate scope.</p></details>
+      <details><summary>How are my data and AI tools handled?</summary><p>This page has no upload and uses no analytics. Your request stays in this tab until you share it. Paid work is AI-assisted where agreed, with local spreadsheet checks and review. Send only non-sensitive data you are authorized to share, and tell us any restrictions on AI use before we accept. Email and payment are handled by their respective providers. We agree the delivery channel and file-retention terms in writing before receiving a file.</p></details>
+      <details><summary>What if the file is bigger or the work is not a fit?</summary><p>Request a quote first; do not pay $15 for a larger file. If the scope cannot be accepted, no work starts and no payment is due. If the delivery misses the agreed rules, ask for the included correction before accepting it.</p></details>
+    </section>
+  </main>
+  <footer class="footer"><div class="footer-inner"><a class="brand" href="../../">VitaPilot AI</a><p>© 2026 VitaPilot AI LLC · <a href="mailto:info@vitapilotai.com">info@vitapilotai.com</a></p></div></footer>
+  <script src="service.js" defer></script>
+</body>
+</html>
