@@ -7,11 +7,11 @@ This repository is prepared for retirement. `index.html` is a small accessible r
 ## Deployment order
 
 1. Complete and review the consolidated Next.js homepage and demo entry flow in the application repository.
-2. Deploy the application, attach `vitapilotai.com` to that deployment, and complete the approved DNS/custom-domain cutover. Coordinate the old GitHub Pages custom-domain setting with the new hosting configuration; this local preparation does not change either service.
+2. Deploy the application, attach `vitapilotai.com` to that deployment, and complete the approved DNS/custom-domain cutover. Keep the current GitHub Pages custom-domain binding and the live branch's `CNAME` file until the application is verified at the apex domain; this pending branch does not change either service.
 3. Verify that `https://vitapilotai.com/` serves the consolidated application over HTTPS and that all three demo personas and both guided tours work through that domain.
-4. Only after the apex cutover is verified, publish this retirement page at any retained old GitHub Pages origin or disable the old Pages deployment. Do **not** publish it while the apex domain still serves this repository: visitors would see the retirement page instead of the application.
+4. Only after the apex cutover and HTTPS checks above pass, remove `vitapilotai.com` from this repository's GitHub Pages custom-domain setting, then merge this retirement branch, including its deletion of `CNAME`. Both changes are required: leaving the file in place can reattach the old custom domain on a later Pages deployment. Publish the retirement page at the retained `vitapilot-ai.github.io` origin or disable the old Pages deployment. Do **not** publish it while the apex domain still serves this repository: visitors would see the retirement page instead of the application.
 5. Verify that the retained old origin redirects to `https://vitapilotai.com/` and that its accessible link also works with JavaScript disabled. Archive the remaining unused assets after approval.
 
 The redirect deliberately skips `vitapilotai.com` and `www.vitapilotai.com` to prevent a self-redirect loop during an accidental early publication. It also skips local HTTP previews. This guard is a fallback, not a replacement for the deployment order above.
 
-`CNAME` and the verification text file are preserved unchanged for review. Their eventual removal or hosting-settings changes belong to the approved cutover, not this source-only change. No production, DNS or GitHub Pages settings were changed while preparing this retirement.
+This pending branch removes `CNAME` for the eventual retirement deployment. The live branch retains its file until the verified cutover and the merge in step 4. The search-engine verification text file is preserved unchanged. No production, DNS or GitHub Pages settings were changed while preparing this retirement.
